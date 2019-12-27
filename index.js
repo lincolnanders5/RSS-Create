@@ -6,7 +6,7 @@ const querystring = require('querystring');
 var net = require('net');
 var urlencode = require('urlencode');
 
-var PORT = 4000;
+var PORT = process.env.PORT || 4000;
 /*
 	Borrowed code from:
 	https://stackoverflow.com/questions/3653065/get-local-ip-address-in-node-js
