@@ -23,10 +23,6 @@ function getNetworkIP(callback) {
   });
   socket.on('error', (e) => callback(e, 'error'));
 }
-
-getNetworkIP(function (error, ip) {
-	IP_ADDRESS = ip;
-});
 /*
 	End borrowed code
 */
@@ -120,6 +116,7 @@ app.get("/feed/:enc_path", async (req, res) => {
 	var dec_dict = querystring.parse(req.params.enc_path, { maxKeys : 0 });
 	var url_path = Object.keys(dec_dict)[0];
 	var feed_data = await render_feed(url_path);
+	console.log(`Feed accessed for path: ${url_path}`);
 
 	var headers = {
 		"Content-Type" : "application/rss+xml",
@@ -135,7 +132,14 @@ app.get("/feed/:enc_path", async (req, res) => {
 app.get("/download/:path", async(req, res) => {
 	var dec_dict = querystring.parse(req.params.path, { maxKeys : 0 });
 	var url_path = Object.keys(dec_dict)[0];
+	console.log(`Download started for file: ${url_path}`);
 	res.sendFile(url_path);
 })
 
-app.listen(PORT, console.log(`Running on port ${PORT}`));
+app.listen(PORT, () => {
+	getNetworkIP(function (error, ip) {
+		console.log("Running....	Copyright 2019 Lincoln Anders");
+		console.log(`Feeds can be found at http://${ip}:${PORT}/feed/[ENCODED URL]`);
+		IP_ADDRESS = ip;
+	});
+});
