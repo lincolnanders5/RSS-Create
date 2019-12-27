@@ -26,3 +26,4 @@ This was a project thrown together to let me download an audiobook into a podcas
 That worked, and the tool has done its job.
 - This program works in Apple Podcasts. 
 It does not work in [Overcast](https://overcast.fm) due to how [Overcast handles downloads](https://github.com/jakubroztocil/podcats/issues/8).
+- Feeds will only refresh and files will only download when the program is running.
