@@ -3,7 +3,7 @@ A simple Node.js program to create a podcast feed for a folder of audio files.
 The program generates an RSS feed to be added inside Apple Podcasts and allows Podcasts to download the files.
 
 ## Overview
-The program can be run with `node index.js`.
+The program can be run with `node index.js`, or specify a port with `PORT=5000 node index.js`.
 A feed will be generated at the URL `http://[LOCAL IP]:4000/feed/[ENCODED PATH]`.
 The program will tell you your `LOCAL IP` when run.
 The `ENCODED PATH` part is an absolute path to a directory on your computer, URL encoded.
