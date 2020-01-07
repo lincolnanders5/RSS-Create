@@ -31,3 +31,6 @@ That worked, and the tool has done its job.
 - Feeds will only refresh and files will only download when the program is running.
 - Feed URLs will change every time the program is started.
 I suggest running the program to download all your files at once if that will bother you.
+- This program uses [ngrok](https://ngrok.com) in its free form.
+It is limited to 8 hours of usage, meaning you have 8 hours to download your podcast feed.
+Due to the security implications of longer usage in this context, I think this is a good natural limit.
