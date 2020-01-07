@@ -3,29 +3,11 @@ const fs = require("fs");
 const path = require("path");
 const app = express();
 const querystring = require('querystring');
-var net = require('net');
-var urlencode = require('urlencode');
+const ngrok = require('ngrok');
+const urlencode = require('urlencode');
 
+var NGROK_URL = "";
 var PORT = process.env.PORT || 4000;
-/*
-	Borrowed code from:
-	https://stackoverflow.com/questions/3653065/get-local-ip-address-in-node-js
-	Makes empty call to determine public broadcast IP address.
-	The IP is neccessary for giving download URLs for each episode.
-	Code has been modified for simplicity
-*/
-var IP_ADDRESS;
-function getNetworkIP(callback) {
-  var socket = net.createConnection(80, 'www.google.com');
-  socket.on('connect', function() {
-    callback(undefined, socket.address().address);
-    socket.end();
-  });
-  socket.on('error', (e) => callback(e, 'error'));
-}
-/*
-	End borrowed code
-*/
 
 var item_template = ({ title = "", description = "", link = "", filepath = "", length = "", date = "", name = "", duration_str = "", guid = "" }) => `<item>
 			    <title>${title}</title>
@@ -46,7 +28,7 @@ var get_ep_obj = (full_path) => {
 	const { gid, ctimeMs, size } = fs.statSync(full_path);
 	const title_parts = full_path.split(".");
 	const path_loc = urlencode(full_path);
-	const download_link = `http://${IP_ADDRESS}:${PORT}/download/${path_loc}`;
+	const download_link = `${NGROK_URL}/download/${path_loc}`;
 	return {
 		title : path.parse(full_path).name,
 		link : download_link,
@@ -99,13 +81,13 @@ var render_feed = (rel_path) => {
 		var safe_stub = path.parse(rel_path).base
 		var feed_obj = {
 			title : path.parse(rel_path).base,
-			link : `http://${IP_ADDRESS}:${PORT}/feed/${safe_stub}`,
-			image_url : "http://www.lincolnanders.com/a/podcast.png",
+			link : `${NGROK_URL}/feed/${safe_stub}`,
+			image_url : "",
 			content_text : ep_item_str,
 		}
 
 		if (ep_item_arr) {
-			feed_obj.link = `http://${IP_ADDRESS}:${PORT}/feed/`;
+			feed_obj.link = `${NGROK_URL}/feed/`;
 		}
 		var feed_str = rss_template(feed_obj);
 		resolve(feed_str);
@@ -136,10 +118,10 @@ app.get("/download/:path", async(req, res) => {
 	res.sendFile(url_path);
 })
 
-app.listen(PORT, () => {
-	getNetworkIP(function (error, ip) {
-		console.log("Running....	Copyright 2019 Lincoln Anders");
-		console.log(`Feeds can be found at http://${ip}:${PORT}/feed/[ENCODED URL]`);
-		IP_ADDRESS = ip;
-	});
+app.listen(PORT, async () => {
+	NGROK_URL = await ngrok.connect(PORT);
+	console.log("Running....	Copyright 2019 Lincoln Anders");
+	console.log(`Feeds can be found at ${NGROK_URL}/feed/[ENCODED URL]`);
+	const apiUrl = ngrok.getUrl();
+	console.log(`ngrok interface avaliable at ${ngrok.getUrl()}`);
 });

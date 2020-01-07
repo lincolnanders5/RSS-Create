@@ -6,10 +6,11 @@
 		"type": "git",
 		"url": "https://github.com/lincolnanders5/RSS-Create.git"
 	},
-    "license": "ISC",
+	"license": "ISC",
 	"dependencies": {
 		"express": "^4.17.1",
 		"fs": "0.0.1-security",
+		"ngrok": "^3.2.7",
 		"path": "^0.12.7",
 		"querystring": "^0.2.0",
 		"urlencode": "^1.1.0"
