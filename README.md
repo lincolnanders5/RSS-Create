@@ -1,6 +1,6 @@
 # RSS-Create
 A simple Node.js program to generate and host a podcast feed for a folder of audio files.
-The program creats an RSS feed to be added inside your podcast player of choice and allows audio files on your computer to be downloaded as podcast episodes without transferring or complicated hosting.
+The program creates an RSS feed to be added inside your podcast player of choice and allows audio files on your computer to be downloaded as podcast episodes without transferring or complicated hosting.
 
 ## Installation
 ```bash
