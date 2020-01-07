@@ -2,6 +2,14 @@
 A simple Node.js program to create a podcast feed for a folder of audio files.
 The program generates an RSS feed to be added inside your podcast player of choice and allows audio files on your computer to be downloaded as podcast episodes.
 
+## Installation
+```bash
+git clone https://github.com/lincolnanders5/RSS-Create.git
+cd RSS-Create
+npm i -q
+node index.js
+```
+
 ## Overview
 The program can be run with `node index.js`, or specify a port with `PORT=5000 node index.js`.
 A feed will be generated at a randomly-generated, one-time [ngrok](https://ngrok.com) URL.
