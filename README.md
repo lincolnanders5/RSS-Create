@@ -33,7 +33,7 @@ Public, randomly-generated, one-time URLs are used, reducing the probability of 
 This is not planned to be fixed as this is a simple solution and not meant to be left running for long spans of time.
 You accept all risk by using the program. When used properly for short periods, this should not be an issue.
 - This repo will likely not be updated by me much in the future.
-This was a project thrown together to let me download an audio book into a podcast player.
+This was a project thrown together to let me download a folder of audio into a podcast player.
 That worked, and the tool has done its job.
 - ~~This program works in Apple Podcasts. It does not work in [Overcast](https://overcast.fm) due to how [Overcast handles downloads](https://github.com/jakubroztocil/podcats/issues/8).~~ **With [ngrok](https://ngrok.com), generated feed URLs are now public and available to apps like Overcast.**
 - Feeds will only refresh and files will only download when the program is running.
