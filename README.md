@@ -2,6 +2,12 @@
 A simple Node.js program to generate and host a podcast feed for a folder of audio files.
 The program creates an RSS feed to be added inside your podcast player of choice and allows audio files on your computer to be downloaded as podcast episodes without transferring or complicated hosting.
 
+***Note*** As reported in [#3][3], [ngrok has ended support][ngrok-2-eol] for clients without configurations set. 
+ngrok has [documentation on required configurations][ngrok-config] for users that want to continue using ngrok.
+ngrok as a convenient form of [port forwarding][port-forward], which can be configured at a network layer as an 
+alternative to providing a configuration file and using ngrok. ngrok is additionally not supported on Apple Silicon.
+I'll look into alternative packages.
+
 ## Installation
 ```bash
 git clone https://github.com/lincolnanders5/RSS-Create.git
@@ -12,7 +18,7 @@ node index.js
 
 ## Overview
 The program can be run with `node index.js`, or specify a port with `PORT=5000 node index.js`.
-A feed will be generated at a randomly-generated, one-time [ngrok](https://ngrok.com) URL.
+A feed will be generated at a randomly-generated, one-time [ngrok][ngrok] URL.
 The program will tell you your URL when started.
 The `ENCODED PATH` part is an *absolute path* to a directory on your computer, URL encoded.
 A URL encoder can be found [here](http://urlencoder.org).
@@ -35,10 +41,16 @@ You accept all risk by using the program. When used properly for short periods, 
 - This repo will likely not be updated by me much in the future.
 This was a project thrown together to let me download a folder of audio into a podcast player.
 That worked, and the tool has done its job.
-- ~~This program works in Apple Podcasts. It does not work in [Overcast](https://overcast.fm) due to how [Overcast handles downloads](https://github.com/jakubroztocil/podcats/issues/8).~~ **With [ngrok](https://ngrok.com), generated feed URLs are now public and available to apps like Overcast.**
+- With [ngrok][ngrok], generated feed URLs are now public and available to apps like podcast players.
 - Feeds will only refresh and files will only download when the program is running.
 - Feed URLs will change every time the program is started.
 I suggest running the program to download all your files at once if that will bother you.
-- This program uses [ngrok](https://ngrok.com) in its free form.
+- This program uses [ngrok][ngrok] in its free form.
 It is limited to 8 hours of usage, meaning you have 8 hours to download your podcast feed.
 Due to the security implications of longer usage in this context, I think this is a good natural limit.
+
+[3]: https://github.com/lincolnanders5/RSS-Create/issues/3
+[ngrok-2-eol]: https://ngrok.com/blog-post/deprecation-agent-version-3-1
+[port-forward]: https://www.pcmag.com/encyclopedia/term/port-forwarding
+[ngrok-config]: https://ngrok.com/docs/guides/upgrade-v2-v3/
+[ngrok]: https://ngrok.com
